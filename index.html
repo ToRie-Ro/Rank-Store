@@ -2,299 +2,540 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Home</title>
-  <link rel="icon" type="image/png" href="image/B.png">
-  <link rel="icon" type="image/x-icon" href="image/B.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Romduol MC Home</title>
   <style>
     * {
+      transition: all 0.3s ease-in-out;
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
-    body {
-      font-family: sans-serif;
-      background-color: #121212;
-      color: #fff;
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
-      background-color: #1c1c1c;
-      padding: 15px 20px;
+      background: #1a1a1a;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
     }
 
-    .logo {
+    footer {
+      background-color: #111;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid #333;
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .logo-container {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 1.4rem;
-      color: #00ff00;
-      font-weight: bold;
+      gap: 0.75rem;
     }
 
-    .logo img {
-      border-radius: 12px;
-      width: 32px;
-      height: 32px;
-    }
-
-    .menu-toggle {
-      font-size: 1.5rem;
-      color: white;
-      background: none;
-      border: none;
-      cursor: pointer;
+    .logo-img {
+      width: 4rem;
+      height: 4rem;
+      object-fit: cover;
+      border-radius: 0.5rem;
     }
 
     nav {
-      display: none;
-      flex-direction: column;
-      background-color: #1c1c1c;
+      display: flex;
+      gap: 1.5rem;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      padding: 12px 20px;
-      border-top: 1px solid #333;
-      transition: background 0.3s;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: #FFD700;
+      transition: width 0.3s ease;
     }
 
     nav a:hover {
-      background-color: #2a2a2a;
+      color: #FFD700;
     }
 
-    .menu-open nav {
+    nav a:hover::after {
+      width: 100%;
+    }
+
+  .banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    opacity: 0.2; /* Adjust for fading effect */
+  }
+
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(1px); /* Optional blur like the example */
+  }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .profile-wrapper {
       display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
 
-    h1 {
+    .profile-card {
+      background: #111;
+      border: 1px solid #ffffff;
+      border-radius: 10px;
+      padding: 1rem;
+      width: 220px;
       text-align: center;
-      font-size: 2.5rem;
-      color: #ffffff;
-      text-shadow: 2px 2px #000;
-      margin: 30px 20px 10px;
+      transition: transform 0.3s ease;
     }
 
-    .shop-container {
+    .profile-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #ffd70066;
+    }
+
+    .profile-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-role {
+      font-weight: bold;
+      color: #FFD700;
+      margin-bottom: 0.25rem;
+    }
+
+    .profile-name {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-ip {
+      background: #222;
+      border: 1px solid #555;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .profile-ip:hover {
+      background: #333;
+    }
+
+    .copied {
+      font-size: 0.8rem;
+      color: #4CAF50;
+      margin-top: 5px;
+    }
+
+    .contact-section {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      padding: 1.5rem;
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px #FFD70022;
+      transition: box-shadow 0.3s ease;
+    }
+    .contact-section:hover {
+      box-shadow: 0 0 15px #FFD70055;
+    }
+
+    .contact-section h2 {
+      color: #FFD700;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .status-text{
+      color: #ffffff;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .mod-box a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: #FFD700;
+      color: black;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .mod-box a:hover {
+      background-color: #ffc400;
+      transform: scale(1.05);
+    }
+
+    .social-inline {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
-      padding: 20px;
+      gap: 1rem;
+      margin-top: 1rem;
     }
 
-    .rank-card {
-      background: #1f1f1f;
-      border: 3px solid #444;
-      border-radius: 12px;
-      padding: 20px;
-      width: 260px;
-      text-align: center;
-      position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .rank-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #00ff00;
-    }
-
-    .rank-image {
-      border-radius: 12px;
-      width: 100px;
-      height: 100px;
-      margin-bottom: 10px;
-      object-fit: contain;
-    }
-
-    .rank-name {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-    }
-
-    .rank-price {
-      font-size: 1.2rem;
-      color: #00ff00;
-      margin-bottom: 15px;
-    }
-
-    .buy-button {
-      background: linear-gradient(to bottom, #59A329, #4C8B2B);
+    .social-inline a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background-color: #222;
       color: white;
-      padding: 12px 20px;
-      font-size: 1rem;
-      border: 2px solid #1a1a1a;
       border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px #2d4723;
-      transition: background 0.3s ease;
-    }
-
-    .buy-button:hover {
-      background: linear-gradient(to bottom, #6BBF3D, #4C8B2B);
-    }
-
-    .badge {
-      position: absolute;
-      top: -15px;
-      right: -15px;
-      background: gold;
-      color: black;
-      font-size: 0.9rem;
-      padding: 6px 10px;
-      border-radius: 8px;
-      transform: rotate(10deg);
-    }
-
-    footer {
-      margin: 40px auto;
-      text-align: center;
-      color: #888;
-      font-size: 0.9rem;
-      padding: 20px;
-    }
-
-    .social-btn {
-      background: linear-gradient(to bottom, #59A329, #4C8B2B);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 6px;
+      border: 1px solid #444;
       text-decoration: none;
       font-size: 1rem;
-      font-weight: bold;
-      border: 2px solid #1a1a1a;
-      box-shadow: 0 4px #2d4723;
-      transition: background 0.3s;
     }
 
-    .image-container {
-      text-align: center;
-      margin-bottom: 40px; /* space between image and body content */
+    .social-inline a img {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
     }
 
-    .image-container img {
-      width: 300px; /* adjust size as needed */
-      height: auto;
+    .social-inline a:hover {
+      background-color: #FFD700;
+      color: black;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #FFD70055;
+    }
+    .server-status-section {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      padding: 1.5rem;
+      background-color: #111;
+      border: 1px solid #333;
       border-radius: 10px;
+      box-shadow: 0 0 10px #FFD70022;
+      transition: box-shadow 0.3s ease;
+      color: white;
+      user-select: none;
     }
 
-    .social-btn:hover {
-      background: linear-gradient(to bottom, #6BBF3D, #4C8B2B);
+    .server-status-section:hover {
+      box-shadow: 0 0 15px #FFD70055;
     }
 
-    @media(min-width: 600px) {
-      nav {
-        display: flex !important;
-        flex-direction: row;
-        gap: 20px;
-        background: none;
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 0.5rem;
+    }
+
+    .status-indicator {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: gray;
+      box-shadow: 0 0 6px gray;
+      animation: pulse-gray 2.5s infinite;
+    }
+
+    .status-indicator.online {
+      background-color: #4CAF50; /* green */
+      box-shadow: 0 0 8px #4CAF50;
+      animation: pulse-green 2s infinite;
+    }
+
+    .status-indicator.offline {
+      background-color: #f44336; /* red */
+      box-shadow: 0 0 8px #f44336;
+      animation: pulse-red 2s infinite;
+    }
+
+    .status-indicator.error {
+      background-color: #ff9800; /* orange */
+      box-shadow: 0 0 8px #ff9800;
+      animation: pulse-orange 2s infinite;
+    }
+
+    .status-text {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .players-box {
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
+      padding: 6px 12px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      width: fit-content;
+      background-color: #222;
+      user-select: text;
+    }
+
+    .motd-box {
+      background-color: #222;
+      border: 1px solid #555;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      color: white;
+      max-height: 160px;
+      overflow-y: auto;
+      user-select: text;
+    }
+
+    /* Pulsing animations */
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 0 8px #4CAF50; }
+      50% { box-shadow: 0 0 20px #4CAF50; }
+    }
+    @keyframes pulse-red {
+      0%, 100% { box-shadow: 0 0 8px #f44336; }
+      50% { box-shadow: 0 0 20px #f44336; }
+    }
+    @keyframes pulse-orange {
+      0%, 100% { box-shadow: 0 0 8px #ff9800; }
+      50% { box-shadow: 0 0 20px #ff9800; }
+    }
+    @keyframes pulse-gray {
+      0%, 100% { box-shadow: 0 0 6px gray; }
+      50% { box-shadow: 0 0 12px gray; }
+    }
+
+    @media (max-width: 768px) {
+      .item-image {
+        width: 90vw;
       }
 
-      .menu-toggle {
-        display: none;
-      }
-
-      nav a {
-        border: none;
-        padding: 0;
+      .profile-wrapper {
+        flex-direction: column;
+        align-items: center;
       }
     }
   </style>
 </head>
 <body>
+  <div class="wrapper">
 
-  <header>
-    <div class="logo">
-      <img src="image/B.png" alt="Logo" />
+    <!-- Header -->
+    <header class="fade-in">
+      <div class="logo-container">
+        <img src="image/server-icon.png" alt="Logo" class="logo-img" />
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="rules.html">Rules</a>
+        <a href="store.html">Store</a>
+        <a href="#">Beta</a>
+      </nav>
+    </header>
+
+    <!-- Banner -->
+    <div class="banner fade-in">
+      <img src="image/banner.png" alt="Romduol MC Banner" />
     </div>
-    <button class="menu-toggle" onclick="document.body.classList.toggle('menu-open')">☰</button>
-    <nav>
-      <a href="https://torie-ro.github.io/Rank-Store/">Home</a>
-      <a href="https://torie-ro.github.io/Report/">Report</a>
-      <a href="https://torie-ro.github.io/Credit/">Credit</a>
-    </nav>
-  </header>
 
-  <div class="image-container">
-    <img src="image/BLUEMC.png" alt="Store Banner">
+    <!-- Profile Cards -->
+    <div class="profile-wrapper fade-in">
+      <div class="profile-card">
+        <img src="image/Rion_Dragon.png" alt="Owner" />
+        <div class="profile-role">Owner</div>
+        <div class="profile-name">Rion_Dragon</div>
+        <div class="profile-ip" onclick="copyToClipboard('romdoulmc.apsara.lol', this)">
+          romdoulmc.apsara.lol
+        </div>
+
+        <div class="profile-ip" onclick="copyToClipboard('25260', this)">
+          25260
+        </div>
+        <div class="copied" style="display: none;">✔ Copied!</div>
+      </div>
+
+      <div class="profile-card">
+        <img src="image/" alt="Admin" />
+        <div class="profile-role">Admin</div>
+        <div class="profile-name"></div>
+        <div class="profile-ip" onclick="copyToClipboard('romdoulmc.apsara.lol', this)">
+          romdoulmc.apsara.lol
+        </div>
+
+        <div class="profile-ip" onclick="copyToClipboard('25260', this)">
+          25260
+        </div>
+        <div class="copied" style="display: none;">✔ Copied!</div>
+      </div>
+    </div>
+
+    <div class="server-status-section contact-section fade-in">
+      <div class="status-text">Server Status</div>
+      <div class="status-row">
+        <div id="status-indicator" class="status-indicator"></div>
+        <div id="status-text" class="status-text">Checking server status...</div>
+      </div>
+      <div class="players-box" id="players-box"></div>
+      <div class="motd-box" id="motd-text"></div>
+    </div>
+
+    <!-- Simple Voice Chat Mod Box -->
+    <div class="contact-section fade-in mod-box">
+      <h2>Simple Voice Chat Mod</h2>
+      <p style="color: #ccc; line-height: 1.6;">
+        Talk with friends in-game using proximity voice chat.<br />
+        Works with Forge & Fabric. Easy to install. Lightweight & powerful.
+      </p>
+      <a href="https://modrinth.com/plugin/simple-voice-chat" target="_blank">Download</a>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section fade-in">
+      <h2>Contact Us</h2>
+      <div class="social-inline">
+        <a href="https://www.tiktok.com/@yourusername" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/TikTok_logo.svg/24px-TikTok_logo.svg.png" alt="TikTok" />
+          TikTok
+        </a>
+        <a href="https://www.youtube.com/@yourchannel" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/24px-YouTube_icon_%282013-2017%29.png" alt="YouTube" />
+          YouTube
+        </a>
+        <a href="https://t.me/yourchannel" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/24px-Telegram_logo.svg.png" alt="Telegram" />
+          Telegram
+        </a>
+        <a href="https://discord.gg/yourinvite" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Discord_logo.svg/24px-Discord_logo.svg.png" alt="Discord" />
+          Discord
+        </a>
+        <a href="https://www.facebook.com/yourpage" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_(2019).png/24px-Facebook_Logo_(2019).png" alt="Facebook" />
+          Facebook
+        </a>
+      </div>
+    </div>
+
   </div>
 
-  <h1>RANK STORE</h1>
+  <!-- Script -->
+  <script>
+    async function checkServerStatus() {
+      const ip = 'melonclub.xyz';
+      const port = '25150';
 
-  <!-- IP Box -->
-  <div style="text-align: center; margin: 20px;">
-    <label for="server-ip" style="font-size: 1.2rem; margin-bottom: 8px; display: block;"></label>
-    <div style="display: inline-flex; align-items: center; gap: 10px;">
-      <input type="text" id="server-ip" value="bluemc.com" readonly
-        style="padding: 10px 15px; font-size: 1rem; border-radius: 6px; border: 3px solid #ffffff; background-color: #1a1a1a; color: #ffffff; text-align: center; width: 260px; font-family: monospace;"
-        onclick="this.select();" />
-      <button onclick="copyIP()" style="padding: 10px 15px; background: #59A329; border: none; border-radius: 6px; color: white; cursor: pointer; font-weight: bold; box-shadow: 0 4px #2d4723;">Copy</button>
-    </div>
-  </div>
+      const statusIndicator = document.getElementById('status-indicator');
+      const statusText = document.getElementById('status-text');
+      const playersBox = document.getElementById('players-box');
+      const motdText = document.getElementById('motd-text');
 
-  <!-- Shop Section -->
-  <div class="shop-container">
-    <div class="rank-card">
-      <div class="badge">MOST POPULAR</div>
-      <img src="image/VIPRANK.png" class="rank-image" alt="Diamond" />
-      <div class="rank-name">RANK VIP</div>
-      <div class="rank-price">$5</div>
-      <button class="buy-button">BUY NOW</button>
-    </div>
+      statusText.textContent = 'Checking server status...';
+      playersBox.textContent = '';
+      motdText.textContent = '';
 
-    <div class="rank-card">
-      <img src="image/MVP.png" class="rank-image" alt="Silver" />
-      <div class="rank-name">RANK MVP</div>
-      <div class="rank-price">$10</div>
-      <button class="buy-button">BUY NOW</button>
-    </div>
+      try {
+        const res = await fetch(`https://api.mcsrvstat.us/2/${ip}:${port}`);
+        const data = await res.json();
 
-    <div class="rank-card">
-      <img src="image/MVP+.png" class="rank-image" alt="Bronze" />
-      <div class="rank-name">RANK MVP+</div>
-      <div class="rank-price">$15</div>
-      <button class="buy-button">BUY NOW</button>
-    </div>
+        if (!data.online) {
+          statusIndicator.className = 'status-indicator offline';
+          statusText.textContent = 'Server is Offline';
+          playersBox.textContent = '';
+          motdText.textContent = '';
+          return;
+        }
 
-    <div class="rank-card">
-      <img src="image/MVP++.png" class="rank-image" alt="VIP" />
-      <div class="rank-name">GLOBAL MVP++</div>
-      <div class="rank-price">$25</div>
-      <button class="buy-button">BUY NOW</button>
-    </div>
-  </div>
+        // Online
+        statusIndicator.className = 'status-indicator online';
+        statusText.textContent = 'Server is Online';
+
+        const players = data.players?.online ?? 0;
+        const maxPlayers = data.players?.max ?? '?';
+        playersBox.textContent = `Players: ${players} / ${maxPlayers}`;
+
+        // Handle MOTD with '||||' separator
+        const rawMotd = data.motd?.clean?.join(' ') || 'No MOTD available';
+
+        const motdSegments = rawMotd.includes('||||')
+          ? rawMotd.split('||||').map(s => s.trim()).filter(Boolean)
+          : [rawMotd];
+
+        motdText.innerHTML = motdSegments.map(line =>
+          line.replace(/ /g, '\u00a0') // preserve spaces
+        ).join('\n');
+      } catch (e) {
+        statusIndicator.className = 'status-indicator error';
+        statusText.textContent = 'Failed to load server status';
+        playersBox.textContent = '';
+        motdText.textContent = '';
+        console.error('Server status error:', e);
+      }
+    }
+
+    // Run check on page load
+    checkServerStatus();
+
+  </script>
 
   <!-- Footer -->
   <footer>
-    <h2 style="color: #ffffff; margin-bottom: 10px;">Contact Us:</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">
-      <a href="https://youtube.com" target="_blank" class="social-btn">YouTube</a>
-      <a href="https://tiktok.com" target="_blank" class="social-btn">TikTok</a>
-      <a href="https://discord.com" target="_blank" class="social-btn">Discord</a>
-      <a href="https://facebook.com" target="_blank" class="social-btn">Facebook</a>
-      <a href="https://t.me/bluemczz" target="_blank" class="social-btn">Telegram</a>
-    </div>
-    &copy; 2025 BLUE MC.
+    &copy; 2025 Romduol MC. All rights reserved.
   </footer>
-
-  <!-- JavaScript -->
-  <script>
-    function copyIP() {
-      const ipInput = document.getElementById("server-ip");
-      ipInput.select();
-      ipInput.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-      alert("IP copied: " + ipInput.value);
-    }
-  </script>
-
 </body>
 </html>
